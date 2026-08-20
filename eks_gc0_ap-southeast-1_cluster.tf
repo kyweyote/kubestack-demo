@@ -11,11 +11,16 @@ module "eks_gc0_ap-southeast-1" {
       base_domain                = var.base_domain
       cluster_availability_zones = "ap-southeast-1a,ap-southeast-1b,ap-southeast-1c"
       cluster_desired_capacity   = 3
-      cluster_instance_type      = "t3a.xlarge"
+      cluster_instance_type      = "t3.small"
       cluster_max_size           = 9
       cluster_min_size           = 3
       name_prefix                = "gc0"
+      #if this line omits, cluster will be latest version
+      #AMI Type AL2_x86_64 is only supported for kubernetes versions 1.32 or earlier error will get
+      cluster_version            = "1.32" 
     }
-    ops = {}
+    ops = { # inherit from apps
+      
+    }
   }
 }
